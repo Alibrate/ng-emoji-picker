@@ -663,16 +663,17 @@
 
 	ngEmojiPicker.directive('emojiPicker',function($parse){
 	  return{
+      scope: {
+        imagesPath: '<',
+        popupClass: '<'
+      },
 	    link: function(scope, element, attrs){
-	      console.log(attrs)
 	      var emojiAttachmentLocation = attrs["emojiAttachmentLocation"] || "bottom right";
 	      var emojiMenuLocation = attrs["emojiMenuLocation"] || "top left";
-	      console.log(emojiAttachmentLocation)
-	      console.log(emojiMenuLocation)
 	      window.emojiPicker = new EmojiPicker({
 	        emojiable_selector: '[emoji-picker="emoji-picker"]',
-	        assetsPath: '/assets/images/ng-emoji-picker',
-	        popupButtonClasses: 'fa fa-smile-o',
+	        assetsPath: scope.imagesPath || '/images/emojis',
+	        popupButtonClasses: scope.popupClass || '',
 	        emojiAttachmentLocation: emojiAttachmentLocation ,
 	        emojiMenuLocation: emojiMenuLocation 
 	      });
