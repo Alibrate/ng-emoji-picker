@@ -661,13 +661,13 @@
 
   var ngEmojiPicker = angular.module('ngEmojiPicker', []);
 
-	ngEmojiPicker.directive('emojiPicker',function($parse){
+	ngEmojiPicker.directive('emojiPicker',["$parse", function($parse){
 	  return{
       scope: {
         imagesPath: '<',
         popupClass: '<'
       },
-	    link: function(scope, element, attrs){
+	    link: ["scope", "element", "attrs", function(scope, element, attrs){
 	      var emojiAttachmentLocation = attrs["emojiAttachmentLocation"] || "bottom right";
 	      var emojiMenuLocation = attrs["emojiMenuLocation"] || "top left";
 	      window.emojiPicker = new EmojiPicker({
@@ -681,8 +681,8 @@
 	      // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
 	      // It can be called as many times as necessary; previously converted input fields will not be converted again
 	      window.emojiPicker.discover();
-	    }
+	    }]
 	  };
-	})
+	}])
 
 })(jQuery, window, document);
